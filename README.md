@@ -6,11 +6,6 @@ Can be obtained by running module analysis.py.
 
 Sample output:
 
-## Additional questions for Machine Learning Engineer (MLE) candidates:
-
-Can be obtained by running module predictions.py
-
-Sample output:
 ```
 +------------------+
 |  avg_session_time|
@@ -70,6 +65,12 @@ only showing top 20 rows
 +--------------+------------------+------------+------------------+
 only showing top 20 rows
 ```
+
+## Additional questions for Machine Learning Engineer (MLE) candidates:
+
+Can be obtained by running module predictions.py
+
+Sample output:
 
 ### Load Prediction:
 Test data:
