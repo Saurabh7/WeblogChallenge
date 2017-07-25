@@ -11,6 +11,7 @@ Sample output:
 Can be obtained by running module predictions.py
 
 Sample output:
+```
 +------------------+
 |  avg_session_time|
 +------------------+
@@ -68,10 +69,11 @@ only showing top 20 rows
 |183.82.151.119|2017.7352014224962|           1|2017.7352014224962|
 +--------------+------------------+------------+------------------+
 only showing top 20 rows
-
+```
 
 ### Load Prediction:
 Test data:
+```
 +-------------------+-------------------+--------------------+
 |         prediction|    request_per_sec|            features|
 +-------------------+-------------------+--------------------+
@@ -98,8 +100,9 @@ Test data:
 
 Root Mean Squared Error (RMSE) on test data = 79.433
 LinearRegression_49958b8b8ca9bf617771
-
+```
 Next minute:
+```
 +-----------------+------------------+--------------------+
 |       prediction|   request_per_sec|            features|
 +-----------------+------------------+--------------------+
@@ -107,9 +110,9 @@ Next minute:
 +-----------------+------------------+--------------------+
 
 LinearRegression_4a6e9bf60a44a28c5773
-
+```
 ### Unique Requests and session time prediction:
-
+```
 +------------------+---------------+--------------------+
 |        prediction|unique_requests|            features|
 +------------------+---------------+--------------------+
@@ -166,3 +169,5 @@ only showing top 20 rows
 
 Root Mean Squared Error (RMSE) on test data = 181.009
 LinearRegression_4b28a1d29fae1ae3c801
+```
+
