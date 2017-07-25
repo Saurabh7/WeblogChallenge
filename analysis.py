@@ -145,8 +145,8 @@ def analyze_session_time(result, write=True):
     avg_time_df = session_time_df.select([mean('total_session_time').alias('avg_session_time')])
     avg_time_df.show()
 
-    if write:
-        avg_time_df.coalesce(1).write.format('com.databricks.spark.csv').options(header='true').save('avg_session_time.csv')
+    #if write:
+    #    avg_time_df.coalesce(1).write.format('com.databricks.spark.csv').options(header='true').save('avg_session_time.csv')
 
     return session_window_df
 
@@ -154,7 +154,6 @@ def analyze_session_time(result, write=True):
 def count_distinct_request(session_window_df):
     """Count distinct requests per session."""
     unique_req_df = session_window_df.groupby('session_id').agg(sf.countDistinct('request').alias('unique_requests'))
-    unique_req_df.limit(20).coalesce(1).write.format('com.databricks.spark.csv').options(header='true').save('distinct_requests.csv')
     unique_req_df.show()
 
 
@@ -172,7 +171,6 @@ def longest_session_time(session_window_df):
         .orderBy(col('avg_session_time'), ascending=False))
 
     ip_df.show()
-    ip_df.limit(20).coalesce(1).write.format('com.databricks.spark.csv').options(header='true').save('longest_session_times.csv')
 
 
 def execute(sc):

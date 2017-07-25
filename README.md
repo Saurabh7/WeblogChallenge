@@ -1,65 +1,168 @@
 # WeblogChallenge
-This is an interview challenge for Paytm Labs. Please feel free to fork. Pull Requests will be ignored.
-
-The challenge is to make make analytical observations about the data using the distributed tools below.
 
 ## Processing & Analytical goals:
 
-1. Sessionize the web log by IP. Sessionize = aggregrate all page hits by visitor/IP during a fixed time window.
-    https://en.wikipedia.org/wiki/Session_(web_analytics)
+Can be obtained by running module analysis.py.
 
-2. Determine the average session time
-
-3. Determine unique URL visits per session. To clarify, count a hit to a unique URL only once per session.
-
-4. Find the most engaged users, ie the IPs with the longest session times
+Sample output:
 
 ## Additional questions for Machine Learning Engineer (MLE) candidates:
-1. Predict the expected load (requests/second) in the next minute
 
-2. Predict the session length for a given IP
+Can be obtained by running module predictions.py
 
-3. Predict the number of unique URL visits by a given IP
+Sample output:
++------------------+
+|  avg_session_time|
++------------------+
+|125.55003786915266|
++------------------+
 
-### Tools allowed (in no particular order):
-- Spark (any language, but prefer Scala or Java)
-- Pig
-- MapReduce (Hadoop 2.x only)
-- Flink
-- Cascading, Cascalog, or Scalding
++-----------------+---------------+
+|       session_id|unique_requests|
++-----------------+---------------+
+| 117.210.14.119_0|              3|
+|117.239.224.160_1|             65|
+| 115.249.21.130_0|             10|
+|  106.51.235.51_0|             89|
+|    8.37.228.47_1|             69|
+|    1.39.61.253_0|             59|
+|  192.193.164.9_1|             55|
+| 223.255.247.66_0|              7|
+|115.242.129.233_0|              7|
+| 59.184.184.157_0|              9|
+|205.175.226.101_0|             89|
+| 115.111.50.254_1|             18|
+|122.179.135.178_0|              8|
+|  182.68.136.65_0|            104|
+| 59.165.251.191_2|             86|
+| 122.164.34.125_0|              8|
+|  188.40.94.195_1|             89|
+|115.248.233.203_2|             86|
+|  101.57.193.44_0|             82|
+|   182.69.48.36_0|            108|
++-----------------+---------------+
+only showing top 20 rows
 
-If you need Hadoop, we suggest 
-HDP Sandbox:
-http://hortonworks.com/hdp/downloads/
-or 
-CDH QuickStart VM:
-http://www.cloudera.com/content/cloudera/en/downloads.html
++--------------+------------------+------------+------------------+
+|            ip|   ip_session_time|num_sessions|  avg_session_time|
++--------------+------------------+------------+------------------+
+|103.29.159.138| 2065.413100928534|           1| 2065.413100928534|
+|125.16.218.194|2064.4753968593723|           1|2064.4753968593723|
+|  14.99.226.79| 2062.909659626952|           1| 2062.909659626952|
+| 122.169.141.4|2060.1589147781488|           1|2060.1589147781488|
+| 14.139.220.98| 2058.319119536318|           1| 2058.319119536318|
+|117.205.158.11| 2057.223160873167|           1| 2057.223160873167|
+|  111.93.89.14|2054.9760343137787|           1|2054.9760343137787|
+|  182.71.63.42| 2050.457969746203|           1| 2050.457969746203|
+| 223.176.3.130|2047.7207751733804|           1|2047.7207751733804|
+|183.82.103.131|2042.7238005503314|           1|2042.7238005503314|
+|   183.82.2.22|2036.8593374397715|           1|2036.8593374397715|
+| 180.149.39.90|2032.6637659873813|           1|2032.6637659873813|
+|  59.93.112.91|  2031.42127955053|           1|  2031.42127955053|
+|   59.98.11.72| 2028.222096032463|           1| 2028.222096032463|
+|    1.39.33.25|2026.2955762147903|           1|2026.2955762147903|
+| 117.194.90.21|2025.4023291924968|           1|2025.4023291924968|
+| 103.16.202.83| 2021.214497871988|           1| 2021.214497871988|
+| 59.91.136.249|2020.7814020393416|           1|2020.7814020393416|
+|103.229.208.65|2019.7680357853242|           1|2019.7680357853242|
+|183.82.151.119|2017.7352014224962|           1|2017.7352014224962|
++--------------+------------------+------------+------------------+
+only showing top 20 rows
 
 
-### Additional notes:
-- You are allowed to use whatever libraries/parsers/solutions you can find provided you can explain the functions you are implementing in detail.
-- IP addresses do not guarantee distinct users, but this is the limitation of the data. As a bonus, consider what additional data would help make better analytical conclusions
-- For this dataset, complete the sessionization by time window rather than navigation. Feel free to determine the best session window time on your own, or start with 15 minutes.
-- The log file was taken from an AWS Elastic Load Balancer:
-http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html#access-log-entry-format
+### Load Prediction:
+Test data:
++-------------------+-------------------+--------------------+
+|         prediction|    request_per_sec|            features|
++-------------------+-------------------+--------------------+
+| 237.42770185899263| 217.03333333333333|[0.38290053454100...|
+| 281.41684693422695|              399.0|[0.18101190329606...|
+| 2.2710459918072274| 0.6166666666666667|[-3.3271705079018...|
+| 111.35889566748895|               55.0|[0.72938437786688...|
+|  335.2559113648025|  390.1666666666667|[0.15142977769063...|
+|  273.6777135919598| 401.26666666666665|[0.03353702919115...|
+|-2.1192889900359546|0.21666666666666667|[-3.5420953130879...|
+| -23.97125130695241|0.38333333333333336|[-4.8746291052416...|
+| 2.4969557335274715|                0.8|[-2.8758284170110...|
+| 281.24103374935316| 166.31666666666666|[0.26704052929798...|
+|  290.5512230310288|              324.6|[0.34824000410803...|
+| 247.86381297539913|  350.8666666666667|[0.23475127386895...|
+| 206.62546178330422|             413.95|[0.10925291946549...|
+|  8.381680280963423|0.13333333333333333|[-2.8187198259187...|
+| 13.135883072068395| 0.5833333333333334|[-2.3047425060880...|
+| 135.99563847389703| 124.53333333333333|[0.21155423244417...|
+| 255.73742486067775|              139.1|[0.41676724513011...|
+| 285.88842453670856| 272.31666666666666|[0.52456497043746...|
+|  335.0971167918226|  313.6333333333333|[0.44597629575456...|
++-------------------+-------------------+--------------------+
 
+Root Mean Squared Error (RMSE) on test data = 79.433
+LinearRegression_49958b8b8ca9bf617771
 
+Next minute:
++-----------------+------------------+--------------------+
+|       prediction|   request_per_sec|            features|
++-----------------+------------------+--------------------+
+|65.83927636275507|41.083333333333336|[0.54066002188605...|
++-----------------+------------------+--------------------+
 
-## How to complete this challenge:
+LinearRegression_4a6e9bf60a44a28c5773
 
-A. Fork this repo in github
-    https://github.com/PaytmLabs/WeblogChallenge
+### Unique Requests and session time prediction:
 
-B. Complete the processing and analytics as defined first to the best of your ability with the time provided.
++------------------+---------------+--------------------+
+|        prediction|unique_requests|            features|
++------------------+---------------+--------------------+
+| 7.642274363862787|              1|[-0.0413864421331...|
+| 7.632187344829386|              2|[-0.0414085721282...|
+|11.082073353957817|              2|[-0.0356041073614...|
+| 5.048678285649532|              2|[-0.0243102390739...|
+|14.154186428660072|              3|[-0.0326311172306...|
+| 6.266638049436478|              4|[-0.0397255277642...|
+|17.696402936793437|              5|[-0.0298671973166...|
+|27.339974987808677|              5|[0.08461825574203...|
+|12.535275286957976|              7|[-0.0396410843619...|
+|10.338567742007223|              8|[-0.0487260297177...|
+|24.834786648132244|              8|[4.42160442513482...|
+|  27.8681297322888|              8|[0.00799198298049...|
+| 40.96093582017295|              8|[0.04421762021845...|
+| 8.745573127350662|              9|[-0.0403498265733...|
+| 24.76869432188854|              9|[-0.0313708722466...|
+| 12.36497604348668|              9|[-0.0085437823036...|
+|  15.1469103540474|              9|[-0.0054607245655...|
+|  37.6238794461855|              9|[0.03846906280774...|
+|15.605146986730997|             10|[-0.0405315254804...|
+|  24.9881670148989|             10|[-0.0355324760615...|
++------------------+---------------+--------------------+
+only showing top 20 rows
 
-C. Place notes in your code to help with clarity where appropriate. Make it readable enough to present to the Paytm Labs interview team.
+Root Mean Squared Error (RMSE) on test data = 82.417
+LinearRegression_4a109e8872a418d43be1
++------------------+------------------+--------------------+
+|        prediction|  avg_session_time|            features|
++------------------+------------------+--------------------+
+| 266.4300338996526|1116.4868351445548|[0.63671194248342...|
+|193.22961433024963|1121.3039311690372|[-0.0378028427474...|
+|204.28165165498606|1127.8099087774754|[-0.0240280351480...|
+| 287.2335208572439| 1129.903481863439|[-0.0119758581617...|
+|317.64045737058893|1131.6294692003103|[0.84938877987475...|
+| 267.2661540448354|1134.8292088992894|[0.10734664779423...|
+|183.59061163629462|1135.1118828352774|[-0.0273848400296...|
+|201.70421618221116|1136.2639733371325|[-0.0400607476526...|
+|221.16688044600272|1137.4961813092232|[-0.0362985178571...|
+|299.29111283573343|1138.4697502094787|[0.05375060823109...|
+|288.49906282935785|1139.7375959008932|[-0.0117104891272...|
+| 517.6189906936288|1139.7915474055335|[-0.0246489306455...|
+|119.61307928407729|1140.5424087047577|[-0.0367373974142...|
+| 348.7529703580742| 1144.239677060803|[0.67887613353002...|
+|218.72970938720945|1144.5412454558536|[0.12849792071543...|
+|235.74781996189904|1150.3329021632671|[-0.0360955218862...|
+|169.83892742390955|1153.0578437447548|[-0.0363399108902...|
+|176.66734504813314| 1157.597222968936|[-0.0156808181442...|
+|273.47607967182785|1160.1657006479654|[-0.0114139335608...|
+|193.75930522783932|1165.3036805316806|[-0.0401905970306...|
++------------------+------------------+--------------------+
+only showing top 20 rows
 
-D. Complete your work in your own github repo and send the results to us and/or present them during your interview.
-
-## What are we looking for? What does this prove?
-
-We want to see how you handle:
-- New technologies and frameworks
-- Messy (ie real) data
-- Understanding data transformation
-This is not a pass or fail test, we want to hear about your challenges and your successes with this particular problem.
+Root Mean Squared Error (RMSE) on test data = 181.009
+LinearRegression_4b28a1d29fae1ae3c801
